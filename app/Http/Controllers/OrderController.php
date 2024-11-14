@@ -12,7 +12,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return inertia('Orders/Index');
+        $orders = Order::all();
+
+        return inertia('Orders/Index', compact('orders'));
     }
 
     /**

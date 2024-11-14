@@ -1,8 +1,10 @@
 <script lang="ts" setup>
+import ErrorAlert from '@/Components/ErrorAlert.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import CustomersTable from '@/Partials/Tables/CustomersTable.vue';
 import { Head } from '@inertiajs/vue3';
 
+const props = defineProps(['customers', 'errors']);
 </script>
 <template>
     <Head title="Clientes" />
@@ -14,9 +16,11 @@ import { Head } from '@inertiajs/vue3';
             </h2>
         </template>
 
-        <div class="py-12">
+        <div class="py-6">
+            <ErrorAlert :errors="props.errors"></ErrorAlert>
+
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <CustomersTable></CustomersTable>
+                <CustomersTable :customers="props.customers"></CustomersTable>
             </div>
         </div>
     </AuthenticatedLayout>

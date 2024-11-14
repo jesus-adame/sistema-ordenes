@@ -12,15 +12,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return inertia('Products/Index');
-    }
+        $products = Product::all();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return inertia('Products/Index', compact('products'));
     }
 
     /**
@@ -28,23 +22,13 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'name' => 'required',
+            'tax' => 'required',
+            'price' => 'required',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Product $product)
-    {
-        //
+        return to_route('products.index');
     }
 
     /**
@@ -52,7 +36,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        return to_route('products.index');
     }
 
     /**
@@ -60,6 +44,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return to_route('products.index');
     }
 }

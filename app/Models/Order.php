@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -17,8 +18,13 @@ class Order extends Model
         'order_date' => 'datetime',
     ];
 
-    public function products(): HasMany
+    public function orderProducts(): HasMany
     {
         return $this->hasMany(OrderProduct::class, 'order_id');
+    }
+
+    public function customers(): BelongsTo
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
 }

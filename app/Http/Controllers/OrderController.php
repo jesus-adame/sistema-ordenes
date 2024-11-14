@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\Product;
 use App\Models\Order;
+use App\Models\Customer;
 
 class OrderController extends Controller
 {
@@ -13,16 +16,10 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::all();
+        $products = Product::all();
+        $customers = Customer::all();
 
-        return inertia('Orders/Index', compact('orders'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
+        return inertia('Orders/Index', compact('orders', 'orders', 'customers'));
     }
 
     /**
@@ -30,21 +27,24 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'customer_id' => 'required',
+            'order_date' => 'required|date',
+            'products' => 'required|array',
+        ]);
+
+        $data = $request->all();
+        $data['folio'] = Str::random();
+
+        Order::create($data);
+
+        return to_route('orders.index');
     }
 
     /**
      * Display the specified resource.
      */
     public function show(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
     {
         //
     }

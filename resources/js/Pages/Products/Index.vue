@@ -15,7 +15,7 @@ const props = defineProps(['products', 'errors']);
             <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">Productos</h2>
         </template>
 
-        <div class="py-6">
+        <div class="py-2">
             <ErrorAlert :errors="props.errors"></ErrorAlert>
 
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">

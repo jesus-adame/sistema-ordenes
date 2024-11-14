@@ -16,7 +16,7 @@ const props = defineProps(['customers', 'errors']);
             </h2>
         </template>
 
-        <div class="py-6">
+        <div class="py-2">
             <ErrorAlert :errors="props.errors"></ErrorAlert>
 
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">

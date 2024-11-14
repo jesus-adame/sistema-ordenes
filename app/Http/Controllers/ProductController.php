@@ -28,6 +28,8 @@ class ProductController extends Controller
             'price' => 'required',
         ]);
 
+        Product::create($request->all());
+
         return to_route('products.index');
     }
 

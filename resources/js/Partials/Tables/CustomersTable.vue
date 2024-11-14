@@ -28,7 +28,7 @@ function closeModals() {
 }
 </script>
 <template>
-<div class="container-fluid mx-auto p-4">
+<div class="container-fluid mx-auto">
     <div class="overflow-x-auto bg-gray-800 rounded-lg shadow-lg">
         <table class="min-w-full text-sm text-left text-gray-400">
             <thead class="bg-gray-700 text-xs uppercase font-medium">

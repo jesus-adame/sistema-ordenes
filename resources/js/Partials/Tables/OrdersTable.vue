@@ -2,15 +2,17 @@
 import { ref } from 'vue';
 import CreateOrder from '../Forms/CreateOrder.vue';
 
+const props = defineProps(['orders']);
+
 const showCreateModal = ref(false);
 const showDetailModal = ref(false);
 
 function openDetailModal() {
-  showDetailModal.value = true;
+    showDetailModal.value = true;
 }
 
 function closeDetailModal() {
-  showDetailModal.value = false;
+    showDetailModal.value = false;
 }
 
 function openCreateModal() {
@@ -27,31 +29,25 @@ function closeModals() {
 }
 </script>
 <template>
-<div class="container-fluid mx-auto p-4">
+<div class="container-fluid mx-auto">
     <div class="overflow-x-auto bg-gray-800 rounded-lg shadow-lg">
         <table class="min-w-full text-sm text-left text-gray-400">
-        <thead class="bg-gray-700 text-xs uppercase font-medium">
-            <tr>
-                <th scope="col" class="px-6 py-3">Name</th>
-                <th scope="col" class="px-6 py-3">Age</th>
-                <th scope="col" class="px-6 py-3">Occupation</th>
-                <th><button @click="openCreateModal" class="bg-green-600 hover:bg-green-700 text-white py-1 px-3 rounded">Registrar</button></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="border-b border-gray-700">
-                <td class="px-6 py-4">John Doe</td>
-                <td class="px-6 py-4">28</td>
-                <td class="px-6 py-4">Engineer</td>
-                <td><button @click="openDetailModal" class="bg-blue-600 hover:bg-blue-700 text-white py-1 px-3 rounded">Details</button></td>
-            </tr>
-            <tr class="border-b border-gray-700">
-                <td class="px-6 py-4">Jane Smith</td>
-                <td class="px-6 py-4">32</td>
-                <td class="px-6 py-4">Designer</td>
-                <td></td>
-            </tr>
-        </tbody>
+            <thead class="bg-gray-700 text-xs uppercase font-medium">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Name</th>
+                    <th scope="col" class="px-6 py-3">Age</th>
+                    <th scope="col" class="px-6 py-3">Occupation</th>
+                    <th><button @click="openCreateModal" class="bg-green-600 hover:bg-green-700 text-white py-1 px-3 rounded">Registrar</button></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item, index) in props.orders" :key="index" class="border-b border-gray-700">
+                    <td class="px-6 py-4">{{ item.name }}</td>
+                    <td class="px-6 py-4">{{ item.tax / 100 }}</td>
+                    <td class="px-6 py-4">{{ item.price }}</td>
+                    <td><button @click="openDetailModal" class="bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded">Cancelar</button></td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>

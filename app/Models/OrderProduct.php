@@ -11,6 +11,7 @@ class OrderProduct extends Model
         'tax',
         'price',
         'quantity',
+        'product_id',
     ];
 
     public function product(): BelongsTo

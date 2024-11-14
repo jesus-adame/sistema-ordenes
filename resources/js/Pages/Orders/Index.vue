@@ -4,7 +4,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import OrdersTable from '@/Partials/Tables/OrdersTable.vue';
 import { Head } from '@inertiajs/vue3';
 
-const props = defineProps(['orders', 'errors']);
+const props = defineProps(['orders', 'customers', 'products', 'errors']);
 </script>
 <template>
     <Head title="Órdenes" />
@@ -18,7 +18,7 @@ const props = defineProps(['orders', 'errors']);
             <ErrorAlert :errors="props.errors"></ErrorAlert>
 
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <OrdersTable :orders="props.orders"></OrdersTable>
+                <OrdersTable :orders="props.orders" :customers="props.customers" :products="props.products"></OrdersTable>
             </div>
         </div>
     </AuthenticatedLayout>

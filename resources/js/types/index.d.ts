@@ -7,6 +7,14 @@ export interface User {
     email_verified_at?: string;
 }
 
+export interface CartProduct {
+    id: number;
+    name: string;
+    tax: number;
+    price: number;
+    quantity: number;
+}
+
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>,
 > = T & {

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\OrderProduct;
 use App\Models\Order;
 use App\Models\Customer;
 
@@ -19,7 +19,7 @@ class OrderController extends Controller
         $products = Product::all();
         $customers = Customer::all();
 
-        return inertia('Orders/Index', compact('orders', 'orders', 'customers'));
+        return inertia('Orders/Index', compact('orders', 'products', 'customers'));
     }
 
     /**
@@ -28,33 +28,37 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'customer_id' => 'required',
-            'order_date' => 'required|date',
+            'customer_id' => 'nullable',
+            'order_date' => 'nullable|date',
             'products' => 'required|array',
         ]);
 
         $data = $request->all();
-        $data['folio'] = Str::random();
+        $data['folio'] = rand(1000, 9999);
 
-        Order::create($data);
+        $productIds = array_map(fn($p) => $p['id'], $data['products']);
+        Product::whereIn('id', $productIds)->get(); // Valida que los productos existan
+
+        $order = new Order($data);
+
+        if ($data['customer_id']) {
+            $customer = Customer::findOrFail($data['customer_id']);
+            $order->customer()->associate($customer);
+        }
+
+        $order->save();
+
+        foreach ($data['products'] as $productData) {
+            $orderProduct = new OrderProduct();
+            $orderProduct->order_id = $order->id;
+            $orderProduct->product_id = $productData['id'];
+            $orderProduct->tax = $productData['tax'];
+            $orderProduct->price = $productData['price'];
+            $orderProduct->quantity = $productData['quantity'];
+            $orderProduct->save();
+        }
 
         return to_route('orders.index');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
     }
 
     /**
@@ -62,6 +66,8 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        $order->delete();
+
+        return to_route('orders.index');
     }
 }

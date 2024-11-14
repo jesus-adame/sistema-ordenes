@@ -16,14 +16,17 @@ php 8.2 o superior
 
 En la primera vez se debe hacer lo siguiente:
 
-1. Registrar al final o al inicio de su archivo de variables de entorno (~/.zshrc o ~/.bashrc) el siguiente comando.
+1. Generar archivo .env
+   `cp .env.example .env`
+
+2. Registrar al final o al inicio de su archivo de variables de entorno (~/.zshrc o ~/.bashrc) el siguiente comando.
    `alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'`
 
-2. Construir y levantar el contenedor.
+3. Construir y levantar el contenedor.
    `vendor/bin/sail build --no-cache`
    `vendor/bin/sail up -d`
 
-3. Correr las migraciones:
+4. Correr las migraciones:
    `vendor/bin/sail artisan migrate`
    `vendor/bin/sail artisan db:seed`
 

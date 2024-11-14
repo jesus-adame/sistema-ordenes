@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id');
-            $table->bigIncrements('folio');
+            $table->bigInteger('folio');
             $table->dateTime('order_date');
             $table->enum('status', ['created', 'approved', 'canceled']);
             $table->timestamps();

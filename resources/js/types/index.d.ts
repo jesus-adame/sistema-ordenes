@@ -7,12 +7,37 @@ export interface User {
     email_verified_at?: string;
 }
 
+export interface Customer {
+    id: number;
+    name: string;
+    lastname: string;
+    email: string;
+    phone: string;
+}
+
 export interface CartProduct {
     id: number;
     name: string;
     tax: number;
     price: number;
     quantity: number;
+}
+
+export interface OrderProduct {
+    id: number;
+    product: CartProduct;
+    tax: number;
+    price: number;
+    quantity: number;
+}
+
+export interface Order {
+    id: number;
+    folio: string;
+    order_date: string;
+    customer: Customer;
+    status: string;
+    order_products: OrderProduct[];
 }
 
 export type PageProps<

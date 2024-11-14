@@ -15,7 +15,7 @@ class Order extends Model
     ];
 
     protected $casts = [
-        'order_date' => 'datetime',
+        'order_date' => 'string',
     ];
 
     public function orderProducts(): HasMany

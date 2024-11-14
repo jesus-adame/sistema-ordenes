@@ -56,7 +56,7 @@ function closeModals() {
 <div v-if="showCreateModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
     <div class="bg-gray-800 text-white rounded-lg shadow-lg w-1/3 p-6">
         <div class="flex justify-between">
-            <h2 class="text-xl font-semibold mb-4">Registrar producto</h2>
+            <h2 class="text-xl font-semibold mb-4">Registrar cliente</h2>
             <div>
                 <button @click="closeCreateModal" class="bg-gray-600 hover:bg-gray-700 text-white py-1 px-3 rounded">Cerrar</button>
             </div>

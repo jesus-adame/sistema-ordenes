@@ -15,7 +15,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::with('customer', 'orderProducts.product')->get();
         $products = Product::all();
         $customers = Customer::all();
 

@@ -43,8 +43,6 @@ function submit() {
 }
 
 function pushProduct() {
-    console.log(selectedProduct.value);
-
     if (typeof selectedProduct.value != 'string') {
         let product = selectedProduct.value
         product.quantity = selectedQuantity.value
